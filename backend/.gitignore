@@ -1,0 +1,63 @@
+# Environment variables
+# Never commit .env files! They contain sensitive keys.
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependencies
+# These are installed via a package manager, so no need to track them.
+/node_modules
+/bower_components
+/jspm_packages
+
+# Python
+# Virtual environment folders
+/venv
+/env
+/.venv
+/.env
+/virtual
+/Virtual
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build and distribution artifacts
+/build
+/dist
+/out
+/.out
+/.next
+
+# Log files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor directories
+.idea
+.vscode/
+*.swp
+*.swo
+*~
+
+# Test reports
+coverage
+.nyc_output

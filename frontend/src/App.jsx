@@ -1,17 +1,19 @@
 // frontend/src/App.jsx
 
-import Header from './components/Header';// <-- Step 1: Import the Footer
 import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
+// We will create and import the Footer later
 
 const App = () => {
   return (
-    // These classes set the default font and colors for the whole site
-    <div className="font-lato bg-alabaster text-midnight">
+    // The body font is set here for the entire application
+    <div className="bg-snow">
       <Header />
-      <main className="py-8">
-        {/* The Outlet is a placeholder where our screen content (like HomeScreen) will be rendered */}
+      <main className="min-h-screen">
+        {/* The Outlet renders the current page's component */}
         <Outlet />
       </main>
+      {/* <Footer /> will go here */}
     </div>
   );
 };

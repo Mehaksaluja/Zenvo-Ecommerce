@@ -1,22 +1,19 @@
 @import "tailwindcss";
 
-/* This is where we define our custom theme using the @theme directive */
 @theme {
-  /* Custom Colors */
+
   --color-snow: #F9F9F9;
   --color-charcoal: #36454F;
   --color-gold: #C0A062;
   --color-taupe: #8B8589;
 }
 
-/* We can also add base styles for our fonts here */
 body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* A helper class for our heading font */
 .font-heading {
   font-family: 'Cormorant Garamond', serif;
 }

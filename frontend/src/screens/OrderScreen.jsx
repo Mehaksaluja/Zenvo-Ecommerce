@@ -1,14 +1,26 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useGetOrderDetailsQuery } from '../slices/ordersApiSlice';
+import { useSelector } from 'react-redux';
+import { useGetOrderDetailsQuery, useDeliverOrderMutation } from '../slices/ordersApiSlice';
+import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 
 const OrderScreen = () => {
   const { id: orderId } = useParams();
-  const { data: order, isLoading, error, refetch } = useGetOrderDetailsQuery(orderId);
 
-  useEffect(() => {
-    // Optional: refetch if the orderId changes, though RTK Query handles this well.
-  }, [orderId]);
+  const { data: order, refetch, isLoading, error } = useGetOrderDetailsQuery(orderId);
+
+  const [deliverOrder, { isLoading: isDelivering }] = useDeliverOrderMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const deliverOrderHandler = async () => {
+    try {
+      await deliverOrder(orderId);
+      refetch();
+    } catch (err) {
+      console.error(err?.data?.message || err.error);
+    }
+  };
 
   return isLoading ? (
     <div className="text-center p-12">Loading...</div>
@@ -18,10 +30,10 @@ const OrderScreen = () => {
     <div className="bg-gray-50 min-h-screen">
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-3xl md:text-4xl font-heading text-charcoal mb-4">
-          Order Confirmation
+          Order Details
         </h1>
         <p className="text-taupe mb-8">
-          Thank you for your purchase! Your order ID is #{order._id.substring(18)}
+          Order ID: #{order._id}
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -65,6 +77,19 @@ const OrderScreen = () => {
               <div className="flex justify-between mb-3"><span>Shipping</span><span className="font-semibold">${order.shippingPrice}</span></div>
               <div className="flex justify-between mb-6"><span>Tax</span><span className="font-semibold">${order.taxPrice}</span></div>
               <div className="flex justify-between text-xl font-bold text-charcoal border-t pt-4"><span>Total</span><span>${order.totalPrice}</span></div>
+
+              {userInfo && userInfo.isAdmin && !order.isDelivered && (
+                <div className="mt-6 border-t pt-6">
+                  <button
+                    type="button"
+                    className="w-full bg-charcoal text-white font-bold py-3 rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-70"
+                    onClick={deliverOrderHandler}
+                    disabled={isDelivering}
+                  >
+                    {isDelivering ? 'Marking...' : 'Mark as Delivered'}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

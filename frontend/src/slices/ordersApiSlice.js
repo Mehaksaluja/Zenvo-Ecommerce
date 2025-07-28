@@ -23,8 +23,21 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getOrders: builder.query({
+      query: () => ({
+        url: '/api/orders',
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    deliverOrder: builder.mutation({
+      query: (orderId) => ({
+        url: `/api/orders/${orderId}/deliver`,
+        method: 'PUT',
+      }),
+    }),
   }),
 });
 
 // RTK Query automatically creates a hook for our new endpoint
-export const { useCreateOrderMutation, useGetOrderDetailsQuery, useGetMyOrdersQuery } = ordersApiSlice;
+export const { useCreateOrderMutation, useGetOrderDetailsQuery, useGetMyOrdersQuery,
+  useGetOrdersQuery, useDeliverOrderMutation, } = ordersApiSlice;

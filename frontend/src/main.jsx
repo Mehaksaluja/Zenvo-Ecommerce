@@ -20,6 +20,10 @@ import ShippingScreen from './screens/ShippingScreen.jsx';
 import PaymentScreen from './screens/PaymentScreen.jsx';
 import PlaceOrderScreen from './screens/PlaceOrderScreen.jsx';
 import OrderScreen from './screens/OrderScreen.jsx';
+import ProfileScreen from './screens/ProfileScreen.jsx';
+import AdminRoute from './components/AdminRoute.jsx';
+import UserListScreen from './screens/admin/userListScreen.jsx';
+import UserEditScreen from './screens/admin/userEditScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +38,11 @@ const router = createBrowserRouter(
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/placeorder" element={<PlaceOrderScreen />} />
         <Route path="/order/:id" element={<OrderScreen />} />
+        <Route path="/profile" element={<ProfileScreen />} />
+      </Route>
+      <Route path="" element={<AdminRoute />}>
+        <Route path="/admin/userlist" element={<UserListScreen />} />
+        <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
       </Route>
     </Route>
   )

@@ -4,11 +4,14 @@ import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
+import cors from 'cors'
+
 const app = express();
 dotenv.config()
 connectDB();
 app.use(express.json());
 
+app.use(cors());
 app.get("/", (req, res) => {
   res.json({
     msg: "Server is running."

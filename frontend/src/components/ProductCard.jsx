@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Rating from './Rating'; // Import the Rating component
+import Rating from './Rating';
+import { FiPlus } from 'react-icons/fi';
 
 const ProductCard = ({ product }) => {
-  // Animation for each card as it appears
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -11,34 +11,36 @@ const ProductCard = ({ product }) => {
 
   return (
     <motion.div
-      className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col"
+      className="group relative flex flex-col bg-white rounded-lg overflow-hidden transition-shadow duration-300 ease-in-out hover:shadow-2xl"
       variants={cardVariants}
     >
-      {/* Image Container */}
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <Link to={`/product/${product._id}`}>
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-64 object-cover"
+            className="w-full h-72 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
           />
         </Link>
+        <div className="absolute top-3 right-3">
+          <button className="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-charcoal shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110">
+            <FiPlus className="w-6 h-6" />
+          </button>
+        </div>
       </div>
 
-      {/* Content Container */}
       <div className="p-5 flex flex-col flex-grow">
-        <h3 className="text-lg font-heading text-charcoal mb-2">
+        <h3 className="text-xl font-heading text-charcoal mb-2">
           <Link to={`/product/${product._id}`} className="hover:text-gold transition-colors">
             {product.name}
           </Link>
         </h3>
 
-        {/* Rating Display */}
         <div className="my-2">
           <Rating value={product.rating} text={`${product.numReviews} reviews`} />
         </div>
 
-        <p className="text-xl font-body font-semibold text-charcoal mt-auto">
+        <p className="text-2xl font-body font-semibold text-charcoal mt-auto pt-4">
           ${product.price}
         </p>
       </div>

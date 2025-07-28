@@ -1,4 +1,3 @@
-// frontend/src/components/Breadcrumb.jsx
 import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
 

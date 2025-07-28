@@ -14,7 +14,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
-    throw new error("No order items");
+    throw new Error("No order items");
   } else {
     const order = new Order({
       orderItems: orderItems.map((x) => ({
@@ -48,7 +48,7 @@ const getOrderById = asyncHandler(async (req, res) => {
     res.json(order)
   } else {
     res.status(404);
-    throw new error("Order not found")
+    throw new Error("Order not found")
   }
 })
 

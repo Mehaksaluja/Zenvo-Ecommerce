@@ -36,7 +36,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
     res.json({ msg: "Product removed" });
   } else {
     res.status(404);
-    throw new error("Product not found")
+    throw new Error("Product not found")
   }
 })
 

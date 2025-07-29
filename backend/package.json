@@ -7,12 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.js",
     "data:import": "node seeder",
-    "data:destroy": "node seeder -d",
-    "start": "node backend/server.js",
-    "install-server": "npm install --prefix backend",
-    "install-client": "npm install --prefix frontend",
-    "install": "npm run install-server && npm run install-client",
-    "build-client": "npm run build --prefix frontend"
+    "data:destroy": "node seeder -d"
   },
   "keywords": [],
   "author": "",

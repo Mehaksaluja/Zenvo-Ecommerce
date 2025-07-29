@@ -1,0 +1,25 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "**Zenvo** is a full-featured e-commerce application built from the ground up using the **MERN** stack (MongoDB, Express.js, React, Node.js). It provides a seamless and elegant shopping experience for users and a powerful management dashboard for administrators.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server.js",
+    "install-server": "npm install --prefix backend",
+    "install-client": "npm install --prefix frontend",
+    "install": "npm run install-server && npm run install-client",
+    "build-client": "npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mehaksaluja/Zenvo-Ecommerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mehaksaluja/Zenvo-Ecommerce/issues"
+  },
+  "homepage": "https://github.com/Mehaksaluja/Zenvo-Ecommerce#readme"
+}

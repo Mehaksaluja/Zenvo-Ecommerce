@@ -33,7 +33,7 @@ const ProfileScreen = () => {
       try {
         const res = await updateProfile({ name, email, password }).unwrap();
         dispatch(setCredentials(res));
-        refetch(); // Refetch user data to update the screen
+        refetch();
         alert('Profile updated successfully!');
       } catch (err) {
         console.error(err?.data?.message || err.error);
@@ -44,11 +44,9 @@ const ProfileScreen = () => {
   return (
     <div className="container mx-auto px-6 py-12">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Left Column: Update Profile */}
         <div className="md:col-span-1">
           <h2 className="text-3xl font-heading mb-6">User Profile</h2>
           <form onSubmit={submitHandler}>
-            {/* Form fields for name, email, password, confirmPassword */}
             <div className="mb-4">
               <label className="block text-taupe mb-2">Name</label>
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-2 border rounded" />
@@ -71,7 +69,7 @@ const ProfileScreen = () => {
           </form>
         </div>
 
-        {/* Right Column: My Orders */}
+
         <div className="md:col-span-2">
           <h2 className="text-3xl font-heading mb-6">My Orders</h2>
           {isLoadingOrders ? (

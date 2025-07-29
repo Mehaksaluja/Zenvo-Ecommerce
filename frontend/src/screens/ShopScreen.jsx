@@ -37,7 +37,7 @@ const ShopScreen = () => {
             initial="hidden"
             animate="visible"
           >
-            {products.map((product) => (
+            {Array.isArray(products) && products.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </motion.div>

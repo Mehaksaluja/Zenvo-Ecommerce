@@ -59,7 +59,7 @@ const ProductListScreen = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {Array.isArray(products) && products.map((product) => (
                   <tr key={product._id} className="border-b border-gray-200 hover:bg-snow/50">
                     <td className="p-4">
                       <img src={product.image} alt={product.name} className="w-16 h-16 object-cover rounded-md" />

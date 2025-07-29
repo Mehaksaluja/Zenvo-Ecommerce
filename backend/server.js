@@ -7,12 +7,19 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import cors from 'cors'
 
-const app = express();
 dotenv.config()
 connectDB();
+
+const app = express();
+app.use(cors());
 app.use(express.json());
 
-app.use(cors());
+// --- 1. API ROUTES MUST COME FIRST ---
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
+
+// --- 2. PRODUCTION DEPLOYMENT LOGIC COMES AFTER ---
 if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, '/frontend/dist')));
@@ -26,9 +33,5 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.use("/api/products", productRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, console.log(`App is running on port ${PORT}`));
+const PORT = process.env.PORT || 5000; // Use port 5000 to match your proxy
+app.listen(PORT, () => console.log(`App is running on port ${PORT}`));

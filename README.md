@@ -53,8 +53,8 @@ To get a local copy up and running, follow these simple steps.
 
 ---
 
-### 📁 1. Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone "https://github.com/Mehaksaluja/Zenvo-Ecommerce"
-cd Zenvo-Ecommerce
+cd Zenvo-Ecommerce 

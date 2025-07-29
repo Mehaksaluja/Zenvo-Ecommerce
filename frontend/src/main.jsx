@@ -27,11 +27,15 @@ import UserEditScreen from './screens/admin/userEditScreen.jsx';
 import ProductListScreen from './components/ProductListScreen.jsx';
 import ProductEditScreen from './screens/admin/ProductEditScreen.jsx';
 import OrderListScreen from './screens/admin/OrderListScreen.jsx';
+import ShopScreen from './screens/ShopScreen.jsx';
+import ContactScreen from './screens/ContactScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/shop" element={<ShopScreen />} />
+      <Route path="/contact" element={<ContactScreen />} />
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />
       <Route path="/login" element={<LoginScreen />} />

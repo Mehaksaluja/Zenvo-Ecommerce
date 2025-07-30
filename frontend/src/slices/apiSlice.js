@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: '',
-  // This prepareHeaders function runs before every request
   prepareHeaders: (headers, { getState }) => {
     // Get the userInfo object from our Redux auth state
     const { userInfo } = getState().auth;

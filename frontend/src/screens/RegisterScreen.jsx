@@ -5,13 +5,14 @@ import axios from 'axios';
 import { setCredentials } from '../slices/authSlice';
 import { motion } from 'framer-motion';
 import { FiUser, FiMail, FiLock, FiUserPlus } from 'react-icons/fi';
-import { toast } from 'react-toastify'; // <-- IMPORT TOAST
+import { toast } from 'react-toastify';
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,16 +32,20 @@ const RegisterScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error('Passwords do not match'); // USE TOAST FOR VALIDATION
+      toast.error('Passwords do not match');
       return;
     }
+    setIsLoading(true); // Set loading to true
     try {
       const res = await axios.post('/api/users', { name, email, password });
       dispatch(setCredentials(res.data));
       navigate(redirect);
     } catch (err) {
-      // USE TOAST TO SHOW THE BACKEND ERROR MESSAGE
-      toast.error(err?.data?.message || err.error);
+      // This is now more robust. It will show the backend's message,
+      // or a generic message if the response is malformed.
+      toast.error(err?.response?.data?.message || 'An unexpected error occurred.');
+    } finally {
+      setIsLoading(false); // Set loading to false in all cases
     }
   };
 
@@ -101,9 +106,12 @@ const RegisterScreen = () => {
             />
           </div>
 
-          <button type="submit" className="w-full bg-charcoal text-white font-bold font-body py-3 rounded-lg hover:bg-opacity-90 transition-colors flex items-center justify-center text-lg transform hover:scale-105">
-            <FiUserPlus className="mr-3" />
-            Register
+          <button
+            type="submit"
+            className="w-full bg-charcoal text-white font-bold font-body py-3 rounded-lg hover:bg-opacity-90 transition-colors flex items-center justify-center text-lg transform hover:scale-105 disabled:opacity-70"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Creating Account...' : <><FiUserPlus className="mr-3" />Register</>}
           </button>
         </form>
         <div className="text-center mt-6">

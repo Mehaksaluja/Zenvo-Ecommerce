@@ -5,6 +5,7 @@ import axios from 'axios';
 import { setCredentials } from '../slices/authSlice';
 import { motion } from 'framer-motion';
 import { FiUser, FiMail, FiLock, FiUserPlus } from 'react-icons/fi';
+import { toast } from 'react-toastify'; // <-- IMPORT TOAST
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
@@ -30,7 +31,7 @@ const RegisterScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      toast.error('Passwords do not match'); // USE TOAST FOR VALIDATION
       return;
     }
     try {
@@ -38,7 +39,8 @@ const RegisterScreen = () => {
       dispatch(setCredentials(res.data));
       navigate(redirect);
     } catch (err) {
-      console.error(err?.data?.message || err.error);
+      // USE TOAST TO SHOW THE BACKEND ERROR MESSAGE
+      toast.error(err?.data?.message || err.error);
     }
   };
 
@@ -54,6 +56,7 @@ const RegisterScreen = () => {
           Create an Account
         </h2>
         <form onSubmit={submitHandler}>
+          {/* Form inputs remain the same */}
           <div className="relative mb-4">
             <FiUser className="absolute top-1/2 left-4 -translate-y-1/2 text-taupe" />
             <input
